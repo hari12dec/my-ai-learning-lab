@@ -1,0 +1,60 @@
+# ------------------------
+# Python virtual environment
+# ------------------------
+.venv/
+venv/
+env/
+ENV/
+
+# ------------------------
+# Python cache and build files
+# ------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+.eggs/
+build/
+dist/
+pip-wheel-metadata/
+
+# ------------------------
+# Jupyter notebooks checkpoints
+# ------------------------
+.ipynb_checkpoints/
+
+# ------------------------
+# OS-specific files
+# ------------------------
+.DS_Store
+Thumbs.db
+
+# ------------------------
+# IDE / Editor settings
+# ------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ------------------------
+# Logs and temporary files
+# ------------------------
+*.log
+*.tmp
+*.bak
+
+# ------------------------
+# Data and outputs (optional — uncomment if large)
+# ------------------------
+# data/
+# outputs/
+
+# ------------------------
+# Environment and config files
+# ------------------------
+.env
+*.env
