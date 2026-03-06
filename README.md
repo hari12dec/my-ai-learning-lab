@@ -34,3 +34,12 @@
 **Subtopics:**  
 - Model Evaluation Metrics: Accuracy, Precision, Recall, F1-score, ROC-AUC  
 - **Grid Search for Hyperparameter Optimization**
+
+## Week 5 — DataScience
+**Univariate Analysis**  
+- Quan & Qual
+- Central Tendancy
+- Mean, Median, Mode 
+- Percentile
+-   
+
