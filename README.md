@@ -41,5 +41,10 @@
 - Central Tendancy
 - Mean, Median, Mode 
 - Percentile
--   
+
+**Bivariate Analysis**
+
+## Week 6 - Advance Machine Learning
+**Select K Algorithm**
+**Recurssive Feature Elimination**
 
