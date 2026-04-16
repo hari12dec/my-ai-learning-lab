@@ -46,5 +46,9 @@
 
 ## Week 6 - Advance Machine Learning
 **Select K Algorithm**
+- Regression
+- Classification
 **Recurssive Feature Elimination**
+- Regression
+- Classification
 
