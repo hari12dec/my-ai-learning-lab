@@ -34,6 +34,7 @@ def run_models(X_train, y_train, X_test, y_test):
     from sklearn.ensemble import RandomForestRegressor
     from sklearn.ensemble import GradientBoostingRegressor
     from sklearn.ensemble import RandomForestRegressor
+    from xgboost import XGBRegressor
 
     results = {}
 
@@ -58,7 +59,21 @@ def run_models(X_train, y_train, X_test, y_test):
     )
     model.fit(X_train, y_train)
     results["GBR"] = r2_score_model(model, X_test, y_test)
-   
+
+    model = XGBRegressor(
+    n_estimators=600,
+    learning_rate=0.03,
+    max_depth=6,
+    min_child_weight=3,
+    subsample=0.8,
+    colsample_bytree=0.8,
+    reg_alpha=0.1,
+    reg_lambda=1,
+    random_state=0
+    )
+    model.fit(X_train, y_train)
+    results["XGB"] = r2_score_model(model, X_test, y_test)
+
     # Linear
     model = LinearRegression()
     model.fit(X_train, y_train)
@@ -105,10 +120,23 @@ def selectKRegressionResult(dataset, target, k=10):
     # Feature Selection
     X_new, selected_features = selectkbest(X, y, k)
 
-    print("Selected Features:", list(selected_features))
+    print("Selected Features (SelectK):", list(selected_features))
+
+    important = [
+        'distance_km',
+        'dist_x_traffic',
+        'distance_x_peak',
+        'Weather_Sunny',
+        'Area_Urban'
+    ]
+
+    # Combine
+    final_features = list(set(selected_features.tolist() + important))
+
+    X_final = X[final_features]
 
     # Split + Scale
-    X_train, X_test, y_train, y_test = split_scale(X_new, y)
+    X_train, X_test, y_train, y_test = split_scale(X_final, y)
 
     # Run models
     results = run_models(X_train, y_train, X_test, y_test)
