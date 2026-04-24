@@ -1,15 +1,16 @@
 import pandas as pd
 
 class Univariate:
+
     def quanQual(self, dataset):
         quan = []
         qual = []
 
         for columnName in dataset.columns:
-            if dataset[columnName].dtype == object:
-                qual.append(columnName)
-            else:
+            if pd.api.types.is_numeric_dtype(dataset[columnName]):
                 quan.append(columnName)
+            else:
+                qual.append(columnName)
 
         return quan, qual
 
@@ -78,3 +79,43 @@ class Univariate:
             )
 
         return descriptive
+
+    def findingOutlier(quan, descriptive):
+        lesser = []
+        greater = []
+        for columnName in quan:
+            if(descriptive[columnName]["Min"] <  descriptive[columnName]["Lesser"]):
+                print("Lesser Outlier present in ", columnName)
+                lesser.append(columnName)
+            if(descriptive[columnName]["Max"] >  descriptive[columnName]["Greater"]):
+                print("Greater Outlier present in ", columnName)
+                greater.append(columnName)
+        return lesser, greater
+        
+    def replacingOutlier(dataset, descriptive, lesser, greater):
+        for columnName in lesser:
+            dataset[columnName][dataset[columnName] < descriptive[columnName]["Lesser"]] =  descriptive[columnName]["Lesser"]
+                    
+        for columnName in greater:
+            dataset[columnName][dataset[columnName] > descriptive[columnName]["Greater"]] =  descriptive[columnName]["Greater"]
+        return dataset
+
+    def get_pdf_probability(dataset, startrange, endrange):
+        ax = sns.distplot(dataset,kde=True,kde_kws={'color':'blue'},color='Green')
+        pyplot.axvline(startrange,color='Red')
+        pyplot.axvline(endrange,color='Red')
+        # generate a sample
+        sample = dataset
+        # calculate parameters
+        sample_mean =sample.mean()
+        sample_std = sample.std()
+        print('Mean=%.3f, Standard Deviation=%.3f' % (sample_mean, sample_std))
+        # define the distribution
+        dist = norm(sample_mean, sample_std)
+        
+        # sample probabilities for a range of outcomes
+        values = [value for value in range(startrange, endrange)]
+        probabilities = [dist.pdf(value) for value in values]    
+        prob=sum(probabilities)
+        print("The area between range({},{}):{}".format(startrange,endrange,sum(probabilities)))
+        return prob
