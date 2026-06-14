@@ -1,0 +1,7 @@
+Pretrained Word Embeddings
+
+https://radimrehurek.com/gensim/models/word2vec.html
+
+PPT Live Link
+
+https://1drv.ms/p/s!Ais8Bxtyjx2UiQknhh70fFSg0hb2?e=qi2cPz
